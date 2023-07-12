@@ -7,7 +7,6 @@ import org.madhuri.app.message.model.Profile;
 public class ProfileService {
 	
 	
-			
 	private ProfileDAO profileDAO = new ProfileDAO();
 	
 	
@@ -23,6 +22,7 @@ public class ProfileService {
 	
 	public Profile getProfile(String profileName)
 	{
+		
 		return new Profile();
 	}
 	

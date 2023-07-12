@@ -7,12 +7,8 @@ import java.util.List;
 import org.madhuri.app.message.model.Profile;
 
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
@@ -27,6 +23,7 @@ public class ProfileHandler {
 	@Path("/all")
 	public List<Profile>getProfiles()
 	{
+		
 		return profileService.getAllProfiles();
 	} 
 	
