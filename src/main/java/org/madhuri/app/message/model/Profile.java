@@ -2,13 +2,24 @@ package org.madhuri.app.message.model;
 
 import java.util.Date;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
-@XmlRootElement
+import jakarta.json.bind.annotation.JsonbProperty;
+
+
 public class Profile {
+	
+	@JsonbProperty("id")
 	private long id;
+	
+	@JsonbProperty("profileName")
 	private String profileName;
+	
+	@JsonbProperty("firstName")
 	private String firstName;
+	
+	@JsonbProperty("lastName")
 	private String lastName;
+	
+	@JsonbProperty("created")
 	private Date created;
 	
 	public Profile()
