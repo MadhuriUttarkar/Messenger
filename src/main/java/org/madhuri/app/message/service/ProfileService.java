@@ -1,45 +1,51 @@
 package org.madhuri.app.message.service;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-import org.madhuri.app.message.database.DatabaseClass;
+import java.util.List;
+import org.madhuri.app.message.dao.ProfileDAO;
 import org.madhuri.app.message.model.Profile;
 
 public class ProfileService {
-	private Map<String,Profile>profiles=DatabaseClass.getProfiles();
+	
+	
+	private ProfileDAO profileDAO = new ProfileDAO();
+	
 	
 	public ProfileService()
 	{
-		profiles.put("Madhuri", new Profile(1L,"madhuri","Madhuri", "Uttarkar",null));
 	}
+	
 	public List<Profile> getAllProfiles()
 	{
-		return new ArrayList <Profile>(profiles.values());
+		List<Profile> allProfiles = profileDAO.getAllProfiles();
+		return allProfiles;
 	}
+	
 	public Profile getProfile(String profileName)
 	{
-		return profiles.get(profileName);
+		
+		return new Profile();
 	}
-	public Profile addProfile(Profile profile)
-	{
-		profile.setId(profiles.size()+1);
-		profiles.put(profile.getProfileName(),profile);
-		return profile;
-	}
-	public Profile updateProfile(Profile profile)
-	{
-		if(profile.getProfileName().isEmpty())
-		{
-			return null;
-		}
-		profiles.put(profile.getProfileName(),profile);
-		return profile;
-	}
-	public Profile removeProfile(String profileName)
-	{
-		return profiles.remove(profileName);
-	}
+	
+	
+//	public Profile addProfile(Profile profile)
+//	{
+//		profile.setId(profiles.size()+1);
+//		profiles.put(profile.getProfileName(),profile);
+//		return profile;
+//	}
+//	public Profile updateProfile(Profile profile)
+//	{
+//		if(profile.getProfileName().isEmpty())
+//		{
+//			return null;
+//		}
+//		profiles.put(profile.getProfileName(),profile);
+//		return profile;
+//	}
+//	public Profile removeProfile(String profileName)
+//	{
+//		return profiles.remove(profileName);
+//	}
 
 
 }
