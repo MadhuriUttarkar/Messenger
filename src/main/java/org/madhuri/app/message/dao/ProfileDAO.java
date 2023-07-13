@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.madhuri.app.message.database.DbConnection;
@@ -47,4 +48,33 @@ public class ProfileDAO {
         return profiles;
     }
 
+	public Profile addProfile(Profile profile) {
+		
+		try {
+        	// 1. get sql connection
+        	DbConnection dbConnection = new DbConnection();
+        	Connection connection = dbConnection.getConnection();
+        	String sql = "INSERT INTO Profile(profileName,firstName,lastName,created)VALUES(?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, profile.getProfileName());
+            statement.setString(2, profile.getFirstName());
+            statement.setString(3, profile.getLastName());
+            statement.setDate(4, (java.sql.Date) profile.getCreated());
+            
+            int rowsAffected = statement.executeUpdate();
+            
+            if (rowsAffected > 0) {
+                System.out.println("Record inserted successfully.");
+            } else {
+                System.out.println("Failed to insert the record.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return profile;
+            
+	}
 }
