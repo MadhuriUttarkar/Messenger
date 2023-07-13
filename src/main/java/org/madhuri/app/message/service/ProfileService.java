@@ -4,6 +4,8 @@ import java.util.List;
 import org.madhuri.app.message.dao.ProfileDAO;
 import org.madhuri.app.message.model.Profile;
 
+
+
 public class ProfileService {
 	
 	
@@ -25,6 +27,11 @@ public class ProfileService {
 		
 		return new Profile();
 	}
+
+	public Profile addProfile(Profile profile) {
+		return profileDAO.addProfile(profile);
+	}
+	
 	
 	
 //	public Profile addProfile(Profile profile)
