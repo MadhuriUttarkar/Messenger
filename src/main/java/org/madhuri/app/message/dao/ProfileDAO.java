@@ -3,9 +3,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.madhuri.app.message.database.DbConnection;
@@ -31,13 +31,25 @@ public class ProfileDAO {
                 String profileName = resultSet.getString("profileName");
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
-                Date created = resultSet.getDate("created");
+                //Date created = resultSet.getDate("created");
+                Timestamp timestamp = resultSet.getTimestamp("created");
+
+                // Convert the Timestamp to a Date object
+                Date created = new Date(timestamp.getTime());
+                
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
 
                 Profile profile = new Profile(id, profileName, firstName, lastName, created);
+                
+                profile.setUsername(username);
+                profile.setPassword(password);
+                
                 profiles.add(profile);
             }
             // 4. return list of profiles
         }
+        
         catch(SQLException e) {
         	e.printStackTrace();
         }
@@ -48,21 +60,27 @@ public class ProfileDAO {
         return profiles;
     }
 
-	public Profile addProfile(Profile profile) {
-		
-		try {
-        	// 1. get sql connection
-        	DbConnection dbConnection = new DbConnection();
-        	Connection connection = dbConnection.getConnection();
-        	String sql = "INSERT INTO Profile(profileName,firstName,lastName,created)VALUES(?,?,?,?)";
+    public Profile addProfile(Profile profile) {
+        try {
+            // 1. Get SQL connection
+            DbConnection dbConnection = new DbConnection();
+            Connection connection = dbConnection.getConnection();
+
+            // 2. Prepare the INSERT statement
+            String sql = "INSERT INTO Profile (profileName, firstName, lastName, created, username, password) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, profile.getProfileName());
             statement.setString(2, profile.getFirstName());
             statement.setString(3, profile.getLastName());
-            statement.setDate(4, (java.sql.Date) profile.getCreated());
-            
+            statement.setDate(4, new java.sql.Date(profile.getCreated().getTime()));
+            statement.setString(5, profile.getUsername());
+            statement.setString(6, profile.getPassword());
+
+            // 3. Execute the INSERT statement
             int rowsAffected = statement.executeUpdate();
-            
+
+            // 4. Check if the profile was successfully added
             if (rowsAffected > 0) {
                 System.out.println("Record inserted successfully.");
             } else {
@@ -75,6 +93,6 @@ public class ProfileDAO {
         }
 
         return profile;
-            
-	}
+    }
+    
 }
