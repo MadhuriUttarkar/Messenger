@@ -4,6 +4,8 @@ import java.util.Date;
 
 import jakarta.json.bind.annotation.JsonbProperty;
 
+import jakarta.json.bind.annotation.JsonbDateFormat;
+
 
 public class Profile {
 	
@@ -20,7 +22,14 @@ public class Profile {
 	private String lastName;
 	
 	@JsonbProperty("created")
+	@JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 	private Date created;
+	
+	@JsonbProperty("username")
+    private String username;
+
+    @JsonbProperty("password")
+    private String password;
 	
 	public Profile()
 	{
@@ -48,6 +57,13 @@ public class Profile {
 	public Date getCreated() {
 		return created;
 	}
+	public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -63,5 +79,11 @@ public class Profile {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
+	public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
