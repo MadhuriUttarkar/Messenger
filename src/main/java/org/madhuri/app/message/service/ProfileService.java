@@ -5,7 +5,6 @@ import org.madhuri.app.message.dao.ProfileDAO;
 import org.madhuri.app.message.model.Profile;
 
 
-
 public class ProfileService {
 	
 	

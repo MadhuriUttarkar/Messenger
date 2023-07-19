@@ -23,5 +23,4 @@ public class MessageHandler {
         List<Message> messages = messageService.getAllMessages();
         return messages;
     }
-    
 }
