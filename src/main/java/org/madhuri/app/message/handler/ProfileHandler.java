@@ -1,11 +1,7 @@
 package org.madhuri.app.message.handler;
-
 import org.madhuri.app.message.service.ProfileService;
-
 import java.util.List;
-
 import org.madhuri.app.message.model.Profile;
-
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -16,6 +12,7 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/profiles")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+
 public class ProfileHandler {
 	
 	private ProfileService profileService=new ProfileService(); 

@@ -1,8 +1,6 @@
 package org.madhuri.app.message.service;
-
 import java.util.List;
 import java.util.Optional;
-
 import org.madhuri.app.message.dao.ProfileDAO;
 import org.madhuri.app.message.model.Profile;
 
