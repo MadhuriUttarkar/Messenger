@@ -1,4 +1,5 @@
 package org.madhuri.app.message.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.madhuri.app.message.database.DbConnection;
 import org.madhuri.app.message.model.Profile;
@@ -94,5 +96,47 @@ public class ProfileDAO {
 
         return profile;
     }
-    
+
+	public Optional<Profile> findByUsername(String username) {
+		Optional<Profile> profile = Optional.empty();
+
+	    try {
+	        // 1. Get SQL connection
+	        DbConnection dbConnection = new DbConnection();
+	        Connection connection = dbConnection.getConnection();
+
+	        // 2. Prepare the SELECT statement
+	        String sql = "SELECT * FROM Profile WHERE username = ?";
+	        PreparedStatement statement = connection.prepareStatement(sql);
+	        statement.setString(1, username);
+
+	        // 3. Execute the SELECT statement
+	        ResultSet resultSet = statement.executeQuery();
+
+	        // 4. Check if a matching profile was found
+	        if (resultSet.next()) {
+	            long id = resultSet.getLong("id");
+	            String profileName = resultSet.getString("profileName");
+	            String firstName = resultSet.getString("firstName");
+	            String lastName = resultSet.getString("lastName");
+	            Timestamp timestamp = resultSet.getTimestamp("created");
+
+	            // Convert the Timestamp to a Date object
+	            Date created = new Date(timestamp.getTime());
+
+	            String password = resultSet.getString("password");
+
+	            profile = Optional.of(new Profile(id, profileName, firstName, lastName, created));
+	            profile.get().setUsername(username);
+	            profile.get().setPassword(password);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return profile;
+	}
 }
+

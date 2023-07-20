@@ -7,14 +7,14 @@ package org.madhuri.app.message.service;
 //import org.madhuri.app.message.database.MockDataClass;
 //import org.madhuri.app.message.model.Comment;
 //import org.madhuri.app.message.model.ErrorMessage;
-//import org.madhuri.app.message.model.Msg;
+//import org.madhuri.app.message.model.Message;
 //
 //import jakarta.ws.rs.WebApplicationException;
 //import jakarta.ws.rs.core.Response;
 //import jakarta.ws.rs.core.Response.Status;
 
 public class CommentService {
-//	private Map<Long, Msg>messages=MockDataClass.getMessages();
+//	private Map<Long, Message>messages=MockDataClass.getMessages();
 //	
 //	public List<Comment> getAllComments(long messageId)
 //	{
@@ -27,7 +27,7 @@ public class CommentService {
 //		Response response=Response.status(Status.NOT_FOUND)
 //				.entity(errorMessage)
 //				.build();
-//		Msg message=messages.get(messageId);
+//		Message message=messages.get(messageId);
 //		if(message==null)
 //		{
 //			throw new WebApplicationException(response);

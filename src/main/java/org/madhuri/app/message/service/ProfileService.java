@@ -1,9 +1,8 @@
 package org.madhuri.app.message.service;
-
 import java.util.List;
+import java.util.Optional;
 import org.madhuri.app.message.dao.ProfileDAO;
 import org.madhuri.app.message.model.Profile;
-
 
 
 public class ProfileService {
@@ -30,6 +29,11 @@ public class ProfileService {
 
 	public Profile addProfile(Profile profile) {
 		return profileDAO.addProfile(profile);
+	}
+
+	public Optional<Profile> findByUsername(String username) {
+		
+		return profileDAO.findByUsername(username);
 	}
 	
 	
