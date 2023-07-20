@@ -1,4 +1,5 @@
 package org.madhuri.app.message.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,9 +35,10 @@ public class MessageDAO {
 
                 // Convert the Time stamp to a Date object
                 Date created = new Date(timestamp.getTime());
+                String recipient = resultSet.getString("recipient");
 
                 // Create a new Message object and set its properties
-                Message message = new Message(id, messageContent, created, username);
+                Message message = new Message(id, messageContent, created, username,recipient);
 
                 messages.add(message);
             }
@@ -48,4 +50,6 @@ public class MessageDAO {
 
         return messages;
     }
+
+	
 }
