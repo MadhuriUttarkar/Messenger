@@ -1,4 +1,5 @@
 package org.madhuri.app.message.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,6 +51,7 @@ public class MessageDAO {
         return messages;
     }
 
+
     public Message addMessage(Message msg) {
         try {
             // 1. Get SQL connection
@@ -82,5 +84,6 @@ public class MessageDAO {
 
         return msg;
     }
+
 
 }

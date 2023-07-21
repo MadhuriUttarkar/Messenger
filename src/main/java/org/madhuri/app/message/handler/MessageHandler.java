@@ -26,6 +26,7 @@ public class MessageHandler {
         return messages;
     }
     
+
     /*
     @POST
     @Path("/add")
@@ -44,4 +45,7 @@ public class MessageHandler {
             throw new RuntimeException("Error adding message.");
         }
     }
+
 }
+
+

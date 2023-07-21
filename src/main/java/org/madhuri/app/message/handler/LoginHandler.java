@@ -1,9 +1,8 @@
 package org.madhuri.app.message.handler;
 
-import java.util.Optional;
-
-import org.madhuri.app.message.dao.ProfileDAO;
 import org.madhuri.app.message.model.Profile;
+import org.madhuri.app.message.service.LoginService;
+
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -17,27 +16,22 @@ import jakarta.ws.rs.core.Response;
 
 public class LoginHandler {
 
-    private ProfileDAO profileDAO;
+	private LoginService loginService;
 
     public LoginHandler() {
-        this.profileDAO = new ProfileDAO();
+        this.loginService = new LoginService();
     }
 
     @POST
     public Response login(Profile profile) {
-        Optional<Profile> foundProfile = profileDAO.findByUsername(profile.getUsername());
+        boolean isAuthenticated = loginService.authenticate(profile.getUsername(), profile.getPassword());
 
-        if (foundProfile.isPresent()) {
-            if (foundProfile.get().getPassword().equals(profile.getPassword())) {
-            	System.out.println("Profile found");
-                return Response.ok(foundProfile).build();
-            } else {
-            	System.out.println("unauthorized user");
-                return Response.status(Response.Status.UNAUTHORIZED).build();
-            }
+        if (isAuthenticated) {
+            System.out.println("Authorized user");
+            return Response.ok().build();
         } else {
-        	System.out.println("profile not found");
-            return Response.status(Response.Status.NOT_FOUND).build();
+            System.out.println("Unauthorized user");
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         }
     }
 }

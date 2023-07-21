@@ -20,6 +20,7 @@ public class Message {
     @JsonbProperty("username")
     private String username;
     
+
     @JsonbProperty("recipient")
     private String recipient;
 
@@ -48,7 +49,7 @@ public class Message {
     public String getUsername() {
         return username;
     }
-    
+   
     public String getRecipient() {
         return recipient;
     }
@@ -69,6 +70,7 @@ public class Message {
         this.username = username;
     }
     
+
     public void setRecipient(String recipient) {
         this.recipient = recipient;
     }

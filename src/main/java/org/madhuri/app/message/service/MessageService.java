@@ -18,9 +18,11 @@ public class MessageService {
         return allMessages;
     }
     
+
     public Message addMessage(Message msg) {
     	
         return messageDAO.addMessage(msg);
     }
+
 
 }
