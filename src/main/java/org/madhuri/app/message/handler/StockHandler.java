@@ -1,8 +1,7 @@
 package org.madhuri.app.message.handler;
 
-import org.madhuri.app.message.gateway.StockGateway;
 import org.madhuri.app.message.model.Stock;
-
+import org.madhuri.app.message.service.StockService;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -16,13 +15,13 @@ import jakarta.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class StockHandler {
 	
-	private StockGateway stockGateway = new StockGateway();
+	private StockService stockService = new StockService();
 
     @GET
     @Path("/{symbol}")
     public Response getStockInfo(@PathParam("symbol") String symbol) {
         try {
-            Stock stock = stockGateway.getStockData(symbol);
+            Stock stock = stockService.getStockData(symbol);
             if (stock != null) {
                 return Response.ok(stock).build();
             } else {

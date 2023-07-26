@@ -1,4 +1,4 @@
-package org.madhuri.app.message.gateway;
+package org.madhuri.app.message.service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -6,17 +6,17 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import org.madhuri.app.message.client.ApiToken;
+import org.madhuri.app.message.constant.Constants;
 import org.madhuri.app.message.model.Stock;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class StockGateway {
-
+public class StockService {
+	
 	private static final String API_BASE_URL = "https://finnhub.io/api/v1/quote";
 
-    public Stock getStockData(String symbol) throws IOException, InterruptedException {
-        String apiUrl = API_BASE_URL + "?symbol=" + symbol + "&token=" + ApiToken.API_TOKEN;
+	public Stock getStockData(String symbol) throws IOException, InterruptedException {
+        String apiUrl = API_BASE_URL + "?symbol=" + symbol + "&token=" + Constants.API_TOKEN;
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
