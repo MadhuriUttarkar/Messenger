@@ -12,8 +12,8 @@ import jakarta.ws.rs.core.MediaType;
 
 
 @Path("/messages")
-@Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 
 public class MessageHandler {
 
@@ -26,26 +26,11 @@ public class MessageHandler {
         return messages;
     }
     
-
-    /*
-    @POST
-    @Path("/add")
-    public Message addMessage(Message msg)
-    {
-    	return messageService.addMessage(msg);
-    }
-    */
     @POST
     @Path("/add")
     public Message addMessage(Message msg) {
-        try {
-            return messageService.addMessage(msg);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error adding message.");
-        }
+        return messageService.addMessage(msg);
     }
-
 }
 
 

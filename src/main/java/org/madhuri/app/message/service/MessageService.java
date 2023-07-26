@@ -9,10 +9,7 @@ public class MessageService {
 
     private MessageDAO messageDAO=new MessageDAO();
     
-    public MessageService()
-    {
-    	
-    }
+    
     public List<Message> getAllMessages() {
     	List<Message> allMessages = messageDAO.getAllMessages();
         return allMessages;

@@ -63,7 +63,7 @@ public class MessageDAO {
                     "VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, msg.getMessageContent());
-            statement.setTimestamp(2, new Timestamp(msg.getCreated().getTime())); // Use setTimestamp instead of setDate
+            statement.setDate(2, new java.sql.Date(msg.getCreated().getTime())); 
             statement.setString(3, msg.getUsername());
             statement.setString(4, msg.getRecipient());
 
@@ -71,9 +71,12 @@ public class MessageDAO {
             int rowsAffected = statement.executeUpdate();
 
             // 4. Check if the message was successfully added
-            if (rowsAffected > 0) {
+            if (rowsAffected > 0) 
+            {
                 System.out.println("Record inserted successfully.");
-            } else {
+            } 
+            else 
+            {
                 System.out.println("Failed to insert the record.");
             }
         } catch (SQLException e) {
@@ -84,6 +87,5 @@ public class MessageDAO {
 
         return msg;
     }
-
-
+    
 }

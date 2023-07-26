@@ -2,10 +2,11 @@ package org.madhuri.app.message.model;
 
 import java.util.Date;
 import jakarta.json.bind.annotation.JsonbProperty;
-import jakarta.json.bind.annotation.JsonbDateFormat;
+import jakarta.json.bind.annotation.JsonbDateFormat; 
 
 
-public class Message {
+
+public class Message{
 
     @JsonbProperty("id")
     private long id;
@@ -25,6 +26,9 @@ public class Message {
     private String recipient;
 
 
+    public Message() {
+    }
+    
     public Message(long id, String messageContent, Date created, String username, String recipient) {
         super();
         this.id = id;
@@ -34,46 +38,55 @@ public class Message {
         this.recipient = recipient;
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public String getMessageContent() {
-        return messageContent;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public Date getCreated() {
-        return created;
-    }
 
-    public String getUsername() {
-        return username;
-    }
-   
-    public String getRecipient() {
-        return recipient;
-    }
+	public String getMessageContent() {
+		return messageContent;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
-    public void setMessageContent(String messageContent) {
-        this.messageContent = messageContent;
-    }
+	public Date getCreated() {
+		return created;
+	}
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    
+	public String getUsername() {
+		return username;
+	}
 
-    public void setRecipient(String recipient) {
-        this.recipient = recipient;
-    }
+
+	public String getRecipient() {
+		return recipient;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public void setMessageContent(String messageContent) {
+		this.messageContent = messageContent;
+	}
+
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
+	}
 }
 
 
