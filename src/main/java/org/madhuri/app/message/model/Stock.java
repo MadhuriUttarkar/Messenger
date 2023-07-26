@@ -27,6 +27,22 @@ public class Stock {
 	
 	@JsonbProperty("t")
 	private double t;
+	
+	public Stock()
+	{
+		
+	}
+
+	public Stock(double c, double d, double dp, double h, double l, double o, double pc, double t) {
+		this.c = c;
+		this.d = d;
+		this.dp = dp;
+		this.h = h;
+		this.l = l;
+		this.o = o;
+		this.pc = pc;
+		this.t = t;
+	}
 
 	public double getC() {
 		return c;
@@ -90,32 +106,5 @@ public class Stock {
 
 	public void setT(double t) {
 		this.t = t;
-	}
-
-	/*
-	public Stock(double c, double d, double dp, double h, double l, double o, double pc, double t) {
-		this.c = c;
-		this.d = d;
-		this.dp = dp;
-		this.h = h;
-		this.l = l;
-		this.o = o;
-		this.pc = pc;
-		this.t = t;
-	}
-	*/
-	@Override
-    public String toString() {
-        return "Stock{" +
-                "c=" + c +
-                ", d=" + d +
-                ", dp=" + dp +
-                ", h=" + h +
-                ", l=" + l +
-                ", o=" + o +
-                ", pc=" + pc +
-                ", t=" + t +
-                '}';
-    }
-	
+	}	
 }
