@@ -51,5 +51,41 @@ public class MessageDAO {
         return messages;
     }
 
-	
+
+    public Message addMessage(Message msg) {
+        try {
+            // 1. Get SQL connection
+            DbConnection dbConnection = new DbConnection();
+            Connection connection = dbConnection.getConnection();
+
+            // 2. Prepare the INSERT statement
+            String sql = "INSERT INTO Message (messageContent, created, username, recipient) " +
+                    "VALUES (?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, msg.getMessageContent());
+            statement.setDate(2, new java.sql.Date(msg.getCreated().getTime())); 
+            statement.setString(3, msg.getUsername());
+            statement.setString(4, msg.getRecipient());
+
+            // 3. Execute the INSERT statement
+            int rowsAffected = statement.executeUpdate();
+
+            // 4. Check if the message was successfully added
+            if (rowsAffected > 0) 
+            {
+                System.out.println("Record inserted successfully.");
+            } 
+            else 
+            {
+                System.out.println("Failed to insert the record.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return msg;
+    }
+    
 }
