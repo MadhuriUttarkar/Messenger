@@ -1,4 +1,4 @@
-package org.madhuri.app.message.client;
+package org.madhuri.app.message.constant;
 
 import java.io.IOException;
 import java.net.URI;
@@ -21,7 +21,7 @@ public class ApiClient {
         String symbol = scanner.nextLine();
         scanner.close();
 
-        String apiUrl = API_BASE_URL + "?symbol=" + symbol + "&token=" + ApiToken.API_TOKEN;
+        String apiUrl = API_BASE_URL + "?symbol=" + symbol + "&token=" + Constants.API_TOKEN;
 
         try {
             HttpClient client = HttpClient.newHttpClient();
