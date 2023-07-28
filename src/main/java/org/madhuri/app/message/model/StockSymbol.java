@@ -4,9 +4,6 @@ import jakarta.json.bind.annotation.JsonbProperty;
 
 public class StockSymbol {
 	
-	@JsonbProperty("count")
-	private long count;
-	
 	@JsonbProperty("description")
 	private String description;
 	
@@ -19,17 +16,17 @@ public class StockSymbol {
 	@JsonbProperty("type")
 	private String type;
 
-	public StockSymbol(long count, String description, String displaySymbol, String symbol, String type) {
+	public StockSymbol()
+	{
 		
-		this.count = count;
+	}
+	
+	public StockSymbol(String description, String displaySymbol, String symbol, String type) {
+		
 		this.description = description;
 		this.displaySymbol = displaySymbol;
 		this.symbol = symbol;
 		this.type = type;
-	}
-
-	public long getCount() {
-		return count;
 	}
 
 	public String getDescription() {
@@ -48,10 +45,6 @@ public class StockSymbol {
 		return type;
 	}
 
-	public void setCount(long count) {
-		this.count = count;
-	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -66,6 +59,5 @@ public class StockSymbol {
 
 	public void setType(String type) {
 		this.type = type;
-		
 	}
 }
