@@ -26,8 +26,7 @@ public class Stock {
 	private double pc;
 	
 	@JsonbProperty("t")
-	private double t;
-	
+	private double t;	
 	public Stock()
 	{
 		
@@ -42,6 +41,7 @@ public class Stock {
 		this.o = o;
 		this.pc = pc;
 		this.t = t;
+		
 	}
 
 	public double getC() {
@@ -76,6 +76,8 @@ public class Stock {
 		return t;
 	}
 
+	
+
 	public void setC(double c) {
 		this.c = c;
 	}
@@ -106,5 +108,7 @@ public class Stock {
 
 	public void setT(double t) {
 		this.t = t;
-	}	
+	}
+
+			
 }
