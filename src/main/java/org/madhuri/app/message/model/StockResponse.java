@@ -12,10 +12,12 @@ public class StockResponse {
 	@JsonbProperty("result")
 	private List<StockSymbol> result;
 	
+	
 	public StockResponse()
 	{
 		
 	}
+	
 
 	public StockResponse(long count, List<StockSymbol> result) {
 		super();

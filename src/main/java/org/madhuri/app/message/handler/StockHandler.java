@@ -49,9 +49,9 @@ public class StockHandler {
             }
 
             StockResponse stockResponse = stockService.searchSymbols(query);
+            List<StockSymbol> stocks = stockResponse.getResult(); 
 
-            if (stockResponse != null && stockResponse.getResult() != null && !stockResponse.getResult().isEmpty()) {
-                List<StockSymbol> stocks = stockResponse.getResult();
+            if (stocks != null && !stocks.isEmpty()) { 
                 return Response.ok(stocks).build();
             } else {
                 return Response.status(Response.Status.NOT_FOUND).build();

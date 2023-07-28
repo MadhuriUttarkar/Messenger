@@ -16,10 +16,12 @@ public class StockSymbol {
 	@JsonbProperty("type")
 	private String type;
 
+	
 	public StockSymbol()
 	{
 		
 	}
+	
 	
 	public StockSymbol(String description, String displaySymbol, String symbol, String type) {
 		
