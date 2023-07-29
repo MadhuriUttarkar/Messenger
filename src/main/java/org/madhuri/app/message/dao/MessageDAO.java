@@ -87,5 +87,98 @@ public class MessageDAO {
 
         return msg;
     }
-    
+
+	public Message getMessageById(long messageId) {
+		
+		Message message = null;
+	
+		try {
+            // 1. Get SQL connection
+            DbConnection dbConnection = new DbConnection();
+            Connection connection = dbConnection.getConnection();
+
+            // 2. Query the database for the message with the given messageId
+            String sql = "SELECT * FROM Message WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, messageId);
+            ResultSet resultSet = statement.executeQuery();
+
+            // 3. If the message with the given messageId is found, create the Message object
+            while(resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String username = resultSet.getString("username");
+                String messageContent = resultSet.getString("messageContent");
+                Timestamp timestamp = resultSet.getTimestamp("created");
+
+                // Convert the Timestamp to a Date object
+                Date created = new Date(timestamp.getTime());
+                String recipient = resultSet.getString("recipient");
+
+                // Create the Message object
+                message = new Message(id, messageContent, created, username, recipient);
+            }
+
+            // 4. Close the resources
+            resultSet.close();
+            statement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return message;
+	}
+
+
+	public List<Message> getMessagesByUsername(String username) {
+		List<Message> messages = new ArrayList<>();
+
+        try {
+            // 1. Get SQL connection
+            DbConnection dbConnection = new DbConnection();
+            Connection connection = dbConnection.getConnection();
+
+            // 2. Prepare the SELECT statement
+            String sql = "SELECT * FROM Message WHERE username=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+
+            // 3. Execute the SELECT statement
+            ResultSet resultSet = statement.executeQuery();
+
+            // 4. Loop through the results and create message entities
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String messageContent = resultSet.getString("messageContent");
+                Timestamp timestamp = resultSet.getTimestamp("created");
+
+                // Convert the Timestamp to a Date object
+                Date created = new Date(timestamp.getTime());
+
+                String recipient = resultSet.getString("recipient");
+
+                // Create a new Message object and set its properties
+                Message message = new Message(id, messageContent, created, username, recipient);
+
+                messages.add(message);
+            }
+
+            // 5. Close the resources
+            resultSet.close();
+            statement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return messages;
+    }
+
+	
 }

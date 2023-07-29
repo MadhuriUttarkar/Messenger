@@ -5,7 +5,6 @@ import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbDateFormat; 
 
 
-
 public class Message{
 
     @JsonbProperty("id")

@@ -7,6 +7,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
@@ -30,6 +31,20 @@ public class MessageHandler {
     @Path("/add")
     public Message addMessage(Message msg) {
         return messageService.addMessage(msg);
+    }
+    
+    @GET
+    @Path("/{messageId}")
+    public Message getMessage(@PathParam("messageId")long messageId)
+    {
+    	return messageService.getMessageById(messageId);
+    }
+    
+    @GET
+    @Path("/user/{username}")
+    public List<Message> getMessagesForUsername(@PathParam("username")String username)
+    {
+    	return messageService.getMessagesForUsername(username);
     }
 }
 
