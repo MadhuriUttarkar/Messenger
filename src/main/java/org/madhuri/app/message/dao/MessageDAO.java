@@ -88,11 +88,18 @@ public class MessageDAO {
         return msg;
     }
 
-	public Message getMessageById(long messageId) {
-		
-		Message message = null;
+	private Message createMessageFromResultSet(ResultSet resultSet, String username) throws SQLException {
+        long id = resultSet.getLong("id");
+        String messageContent = resultSet.getString("messageContent");
+        Timestamp timestamp = resultSet.getTimestamp("created");
+        Date created = new Date(timestamp.getTime());
+        String recipient = resultSet.getString("recipient");
+        return new Message(id, messageContent, created, username, recipient);
+    }
 	
-		try {
+	public Message getMessageById(long messageId) {
+        Message message = null;
+        try {
             // 1. Get SQL connection
             DbConnection dbConnection = new DbConnection();
             Connection connection = dbConnection.getConnection();
@@ -104,20 +111,9 @@ public class MessageDAO {
             ResultSet resultSet = statement.executeQuery();
 
             // 3. If the message with the given messageId is found, create the Message object
-            while(resultSet.next()) {
-                long id = resultSet.getLong("id");
-                String username = resultSet.getString("username");
-                String messageContent = resultSet.getString("messageContent");
-                Timestamp timestamp = resultSet.getTimestamp("created");
-
-                // Convert the Timestamp to a Date object
-                Date created = new Date(timestamp.getTime());
-                String recipient = resultSet.getString("recipient");
-
-                // Create the Message object
-                message = new Message(id, messageContent, created, username, recipient);
+            if (resultSet.next()) {
+                message = createMessageFromResultSet(resultSet, resultSet.getString("username"));
             }
-
             // 4. Close the resources
             resultSet.close();
             statement.close();
@@ -129,10 +125,9 @@ public class MessageDAO {
             e.printStackTrace();
         }
 
-        return message;
+        return message;  
 	}
-
-
+	
 	public List<Message> getMessagesByUsername(String username) {
 		List<Message> messages = new ArrayList<>();
 
@@ -151,21 +146,9 @@ public class MessageDAO {
 
             // 4. Loop through the results and create message entities
             while (resultSet.next()) {
-                long id = resultSet.getLong("id");
-                String messageContent = resultSet.getString("messageContent");
-                Timestamp timestamp = resultSet.getTimestamp("created");
-
-                // Convert the Timestamp to a Date object
-                Date created = new Date(timestamp.getTime());
-
-                String recipient = resultSet.getString("recipient");
-
-                // Create a new Message object and set its properties
-                Message message = new Message(id, messageContent, created, username, recipient);
-
+                Message message = createMessageFromResultSet(resultSet, username);
                 messages.add(message);
             }
-
             // 5. Close the resources
             resultSet.close();
             statement.close();
@@ -179,6 +162,5 @@ public class MessageDAO {
 
         return messages;
     }
-
 	
 }
