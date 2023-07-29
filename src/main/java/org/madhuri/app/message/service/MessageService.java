@@ -22,4 +22,15 @@ public class MessageService {
     }
 
 
+	public Message getMessageById(long messageId) {
+		return messageDAO.getMessageById(messageId);
+	}
+
+
+	public List<Message> getMessagesForUsername(String username) {
+		List<Message> userMessages = messageDAO.getMessagesByUsername(username);
+        return userMessages;
+
+	}
+
 }
