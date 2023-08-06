@@ -6,24 +6,27 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-	private static HibernateUtil instance=new HibernateUtil();
-	  private SessionFactory sessionFactory;
-	  
-	  public static HibernateUtil getInstance(){
-	      return instance;
-	  }
-	  
-	  private HibernateUtil(){
-	    Configuration configuration = new Configuration();
-	    configuration.configure("hibernate.cfg.xml");
-	        
-	    sessionFactory = configuration.buildSessionFactory();
-	  }
-	  
-	  public static Session getSession(){
-	    Session session =  getInstance().sessionFactory.openSession();
-	    
-	    return session;
-	  }
+	
+	//private static SessionFactory sessionFactory;
+
+	
+
+	/*public HibernateUtil() {
+		Configuration configuration = new Configuration();
+		configuration.configure("hibernate.cfg.xml");
+
+		sessionFactory = configuration.buildSessionFactory();
+	}*/
+
+	public static Session getSession() {
+		Configuration configuration = new Configuration();
+		configuration.configure("hibernate.cfg.xml");
+
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+
+		Session session = sessionFactory.openSession();
+
+		return session;
+	}
 
 }
