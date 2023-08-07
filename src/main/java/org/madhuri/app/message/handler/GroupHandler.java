@@ -38,8 +38,5 @@ public class GroupHandler {
 	{
 		groupService.deleteGroup(groupid);
 	}
-	
-	
-	
 }
 

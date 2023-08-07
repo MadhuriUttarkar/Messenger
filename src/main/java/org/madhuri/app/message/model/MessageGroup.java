@@ -1,8 +1,6 @@
 package org.madhuri.app.message.model;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,9 +28,8 @@ public class MessageGroup {
 
     @Column(name = "created")
     private Date created;
-
-        
-    public MessageGroup() {
+    
+        public MessageGroup() {
     	
     }
 
@@ -69,6 +66,8 @@ public class MessageGroup {
 	public Date getCreated() {
 		return created;
 	}
+	
+	
 	
 	public void setGroupid(Long groupid) {
 		this.groupid = groupid;

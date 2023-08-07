@@ -56,5 +56,32 @@ public class GroupDAO {
         } finally {
             session.close();
         }
-    }		
-	}
+    }
+
+	public void updateGroup(MessageGroup group) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            session.update(group); 
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+	public MessageGroup getGroupById(long groupId) {
+        Session session = HibernateUtil.getSession();
+        try {
+            return session.get(MessageGroup.class, groupId);
+        } finally {
+            session.close();
+        }
+    }
+}
