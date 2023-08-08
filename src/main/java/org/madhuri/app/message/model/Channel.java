@@ -30,20 +30,20 @@ public class Channel {
 	private Date created_at;
 	
 	@Column(name="created_by")
-	private String created_by;
+	private Long created_by;
 	
 	@Column(name="updated_at")
 	private Date updated_at;
 	
 	@Column(name="updated_by")
-	private String updated_by;
+	private Long updated_by;
 
 	public Channel() {
 
 	}
 
-	public Channel(Long id, String name, Long admin_id, String welcome_message, Date created_at, String created_by,
-			Date updated_at, String updated_by) {
+	public Channel(Long id, String name, Long admin_id, String welcome_message, Date created_at, Long created_by,
+			Date updated_at, Long updated_by) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -75,7 +75,7 @@ public class Channel {
 		return created_at;
 	}
 
-	public String getCreated_by() {
+	public Long getCreated_by() {
 		return created_by;
 	}
 
@@ -83,7 +83,7 @@ public class Channel {
 		return updated_at;
 	}
 
-	public String getUpdated_by() {
+	public Long getUpdated_by() {
 		return updated_by;
 	}
 
@@ -107,7 +107,7 @@ public class Channel {
 		this.created_at = created_at;
 	}
 
-	public void setCreated_by(String created_by) {
+	public void setCreated_by(Long created_by) {
 		this.created_by = created_by;
 	}
 
@@ -115,7 +115,7 @@ public class Channel {
 		this.updated_at = updated_at;
 	}
 
-	public void setUpdated_by(String updated_by) {
+	public void setUpdated_by(Long updated_by) {
 		this.updated_by = updated_by;
 	}
 
