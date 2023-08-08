@@ -1,8 +1,6 @@
 package org.madhuri.app.message.model;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,31 +9,29 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="MessageGroup")
+@Table(name = "MessageGroup")
 public class MessageGroup {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="groupid")
-    private Long groupid;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "groupid")
+	private Long groupid;
 
-    @Column(name="groupName")
-    private String groupName;
+	@Column(name = "groupName")
+	private String groupName;
 
-    @Column(name="groupAdmin")
-    private String groupAdmin;
+	@Column(name = "groupAdmin")
+	private String groupAdmin;
 
-    @Column(name="groupMessages")
-    private String groupMessages;
+	@Column(name = "groupMessages")
+	private String groupMessages;
 
-    @Column(name = "created")
-    private Date created;
+	@Column(name = "created")
+	private Date created;
 
-        
-    public MessageGroup() {
-    	
-    }
+	public MessageGroup() {
 
+	}
 
 	public MessageGroup(Long groupid, String groupName, String groupAdmin, String groupMessages, Date created) {
 		this.groupid = groupid;
@@ -45,53 +41,44 @@ public class MessageGroup {
 		this.created = created;
 	}
 
-
 	public Long getGroupid() {
 		return groupid;
 	}
-
 
 	public String getGroupName() {
 		return groupName;
 	}
 
-
 	public String getGroupAdmin() {
 		return groupAdmin;
 	}
-
 
 	public String getGroupMessages() {
 		return groupMessages;
 	}
 
-
 	public Date getCreated() {
 		return created;
 	}
-	
+
 	public void setGroupid(Long groupid) {
 		this.groupid = groupid;
 	}
-
 
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
 
-
 	public void setGroupAdmin(String groupAdmin) {
 		this.groupAdmin = groupAdmin;
 	}
-
 
 	public void setGroupMessages(String groupMessages) {
 		this.groupMessages = groupMessages;
 	}
 
-
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
-    }
+
+}
