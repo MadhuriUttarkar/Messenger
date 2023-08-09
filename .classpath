@@ -59,5 +59,6 @@
 	<classpathentry kind="lib" path="C:/Users/madhu/Downloads/YahooFinanceAPI-3.17.0/YahooFinanceAPI-3.17.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/madhu/Downloads/YahooFinanceAPI-3.17.0/YahooFinanceAPI-3.17.0-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/madhu/Downloads/YahooFinanceAPI-3.17.0/YahooFinanceAPI-3.17.0-javadoc.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
