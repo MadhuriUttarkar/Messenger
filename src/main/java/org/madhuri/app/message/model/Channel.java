@@ -21,38 +21,38 @@ public class Channel {
 	private String name;
 
 	@Column(name = "admin_id")
-	private Long admin_id;
+	private Long adminId;
 
 	@Column(name = "welcome_message")
-	private String welcome_message;
+	private String welcomeMessage;
 
 	@Column(name = "created_at")
-	private Date created_at;
-	
-	@Column(name="created_by")
-	private Long created_by;
-	
-	@Column(name="updated_at")
-	private Date updated_at;
-	
-	@Column(name="updated_by")
-	private Long updated_by;
+	private Date createdAt;
+
+	@Column(name = "created_by")
+	private Long createdBy;
+
+	@Column(name = "updated_at")
+	private Date updatedAt;
+
+	@Column(name = "updated_by")
+	private Long updatedBy;
 
 	public Channel() {
 
 	}
 
-	public Channel(Long id, String name, Long admin_id, String welcome_message, Date created_at, Long created_by,
-			Date updated_at, Long updated_by) {
+	public Channel(Long id, String name, Long adminId, String welcomeMessage, Date createdAt, Long createdBy,
+			Date updatedAt, Long updatedBy) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.admin_id = admin_id;
-		this.welcome_message = welcome_message;
-		this.created_at = created_at;
-		this.created_by = created_by;
-		this.updated_at = updated_at;
-		this.updated_by = updated_by;
+		this.adminId = adminId;
+		this.welcomeMessage = welcomeMessage;
+		this.createdAt = createdAt;
+		this.createdBy = createdBy;
+		this.updatedAt = updatedAt;
+		this.updatedBy = updatedBy;
 	}
 
 	public Long getId() {
@@ -63,28 +63,28 @@ public class Channel {
 		return name;
 	}
 
-	public Long getAdmin_id() {
-		return admin_id;
+	public Long getAdminId() {
+		return adminId;
 	}
 
-	public String getWelcome_message() {
-		return welcome_message;
+	public String getWelcomeMessage() {
+		return welcomeMessage;
 	}
 
-	public Date getCreated_at() {
-		return created_at;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public Long getCreated_by() {
-		return created_by;
+	public Long getCreatedBy() {
+		return createdBy;
 	}
 
-	public Date getUpdated_at() {
-		return updated_at;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public Long getUpdated_by() {
-		return updated_by;
+	public Long getUpdatedBy() {
+		return updatedBy;
 	}
 
 	public void setId(Long id) {
@@ -95,29 +95,28 @@ public class Channel {
 		this.name = name;
 	}
 
-	public void setAdmin_id(Long admin_id) {
-		this.admin_id = admin_id;
+	public void setAdminId(Long adminId) {
+		this.adminId = adminId;
 	}
 
-	public void setWelcome_message(String welcome_message) {
-		this.welcome_message = welcome_message;
+	public void setWelcomeMessage(String welcomeMessage) {
+		this.welcomeMessage = welcomeMessage;
 	}
 
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	public void setCreated_by(Long created_by) {
-		this.created_by = created_by;
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
 	}
 
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
-	public void setUpdated_by(Long updated_by) {
-		this.updated_by = updated_by;
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 
-	
 }
