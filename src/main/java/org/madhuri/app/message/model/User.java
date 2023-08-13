@@ -8,55 +8,41 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Users")
+@Table(name = "Users")
 public class User {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="userid")
-	private Long userid;
-	
-	@Column(name="username")
-	private String username;
-	
-	@Column(name="groupName")
-	private String groupName;
-	
-	public User()
-	{
-		
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+
+	@Column(name = "name")
+	private String name;
+
+	public User() {
+
 	}
-	
-	public User(Long userid, String username, String groupName) {
+
+	public User(Long id, String name) {
 		super();
-		this.userid = userid;
-		this.username = username;
-		this.groupName = groupName;
+		this.id = id;
+		this.name = name;
 	}
 
-	public Long getUserid() {
-		return userid;
+	public Long getId() {
+		return id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public String getGroupName() {
-		return groupName;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setUserid(Long userid) {
-		this.userid = userid;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-
-	
 }

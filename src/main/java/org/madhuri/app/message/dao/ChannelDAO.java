@@ -57,4 +57,31 @@ public class ChannelDAO {
 			session.close();
 		}
 	}
+
+	public Channel getChannelById(long id) {
+		Session session = HibernateUtil.getSession();
+        Channel channel = session.get(Channel.class, id);
+        session.close();
+        return channel;
+	}
+
+	public Channel updateChannel(Channel existingChannel) {
+		 Session session = HibernateUtil.getSession();
+	        Transaction transaction = null;
+
+	        try {
+	            transaction = session.beginTransaction();
+	            session.update(existingChannel); // Update the channel entity
+	            transaction.commit();
+	        } catch (Exception e) {
+	            if (transaction != null) {
+	                transaction.rollback();
+	            }
+	            e.printStackTrace();
+	        } finally {
+	            session.close();
+	        }
+
+	        return existingChannel;
+	    }
 }
