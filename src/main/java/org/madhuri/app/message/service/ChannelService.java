@@ -43,9 +43,8 @@ public class ChannelService {
         // Update the fields of the existing channel with the updated channel's data
         existingChannel.setName(updatedChannel.getName());
         existingChannel.setWelcomeMessage(updatedChannel.getWelcomeMessage());
-
+        existingChannel.setUpdatedAt(updatedChannel.getUpdatedAt());
+        existingChannel.setUpdatedBy(updatedChannel.getUpdatedBy());
         return channelDAO.updateChannel(existingChannel);		
 	}
-	
-	
 }

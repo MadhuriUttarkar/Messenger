@@ -1,5 +1,6 @@
 package org.madhuri.app.message.dao;
 
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -71,6 +72,7 @@ public class ChannelDAO {
 
 	        try {
 	            transaction = session.beginTransaction();
+	            existingChannel.setUpdatedAt(new Date());
 	            session.update(existingChannel); // Update the channel entity
 	            transaction.commit();
 	        } catch (Exception e) {
