@@ -15,5 +15,7 @@
         <property name="show_sql">true</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <mapping class="org.madhuri.app.message.model.Channel"/>
+        <mapping class="org.madhuri.app.message.model.User"/>
+        <mapping class="org.madhuri.app.message.model.ChannelUser"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,11 +1,18 @@
 package org.madhuri.app.message.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -37,6 +44,12 @@ public class Channel {
 
 	@Column(name = "updated_by")
 	private Long updatedBy;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name ="channel_user",
+	joinColumns = @JoinColumn(name="channel_id"),
+	inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> users = new ArrayList<>();
 
 	public Channel() {
 
@@ -119,4 +132,23 @@ public class Channel {
 		this.updatedBy = updatedBy;
 	}
 
+	public List<User> getUsers()
+	{
+		return users;
+	}
+	
+	public void setUsers(List<User> users)
+	{
+		this.users = users;
+	}
+	
+	public void addUser(User user)
+	{
+		if(users == null)
+		{
+			users = new ArrayList<>();
+		}
+		users.add(user);
+		user.getChannels().add(this);
+	}
 }

@@ -1,8 +1,12 @@
 package org.madhuri.app.message.handler;
 
 import org.madhuri.app.message.service.ChannelService;
+import org.madhuri.app.message.service.UserService;
+
 import java.util.List;
 import org.madhuri.app.message.model.Channel;
+import org.madhuri.app.message.model.User;
+
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -38,18 +42,20 @@ public class ChannelHandler {
 	public void deleteChannel(@PathParam("id") long id) {
 		channelService.deleteChannel(id);
 	}
+
+	@PUT
+	@Path("/update/{id}")
+	public Response updateChannel(@PathParam("id") long id, Channel updatedChannel) {
+		Channel existingChannel = channelService.getChannelById(id);
+		if (existingChannel == null) {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
+
+		updatedChannel.setId(id);
+
+		Channel updated = channelService.updateChannel(updatedChannel);
+		return Response.ok(updated).build();
+	}
+
 	
-    @PUT 
-    @Path("/update/{id}")
-    public Response updateChannel(@PathParam("id") long id, Channel updatedChannel) {
-        Channel existingChannel = channelService.getChannelById(id);
-        if (existingChannel == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
-        updatedChannel.setId(id); 
-
-        Channel updated = channelService.updateChannel(updatedChannel);
-        return Response.ok(updated).build();
-    }
 }
