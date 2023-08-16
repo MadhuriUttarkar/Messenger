@@ -44,11 +44,9 @@ public class Channel {
 
 	@Column(name = "updated_by")
 	private Long updatedBy;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name ="channel_user",
-	joinColumns = @JoinColumn(name="channel_id"),
-	inverseJoinColumns = @JoinColumn(name = "user_id"))
+	@JoinTable(name = "channel_user", joinColumns = @JoinColumn(name = "channel_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users = new ArrayList<>();
 
 	public Channel() {
@@ -57,7 +55,6 @@ public class Channel {
 
 	public Channel(Long id, String name, Long adminId, String welcomeMessage, Date createdAt, Long createdBy,
 			Date updatedAt, Long updatedBy) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.adminId = adminId;
@@ -132,22 +129,17 @@ public class Channel {
 		this.updatedBy = updatedBy;
 	}
 
-	public List<User> getUsers()
-	{
+	public List<User> getUsers() {
 		return users;
 	}
-	
-	public void setUsers(List<User> users)
-	{
-		this.users = users;
+
+	public void setUsers(List<User> users) 
+	{ 
+		this.users = users; 
 	}
-	
-	public void addUser(User user)
-	{
-		if(users == null)
-		{
-			users = new ArrayList<>();
-		}
+	 
+
+	public void addUser(User user) {
 		users.add(user);
 		user.getChannels().add(this);
 	}

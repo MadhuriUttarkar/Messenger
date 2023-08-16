@@ -28,10 +28,11 @@ public class ChannelService {
 	}
 
 	public Channel updateChannel(Channel updatedChannel) {
-        if (updatedChannel.getId() == null) {
+		if (updatedChannel.getId() == null) {
             throw new IllegalArgumentException("Channel ID cannot be null");
         }
 
+        // Check if the channel exists
         Channel existingChannel = channelDAO.getChannelById(updatedChannel.getId());
         if (existingChannel == null) {
             throw new IllegalArgumentException("Channel with ID " + updatedChannel.getId() + " not found");
@@ -42,8 +43,12 @@ public class ChannelService {
         existingChannel.setWelcomeMessage(updatedChannel.getWelcomeMessage());
         existingChannel.setUpdatedAt(updatedChannel.getUpdatedAt());
         existingChannel.setUpdatedBy(updatedChannel.getUpdatedBy());
+        return channelDAO.updateChannel(existingChannel);		
+	}
 
-        return channelDAO.updateChannel(existingChannel); // Assuming a method named "updateChannel" in ChannelDAO
-    }
+	public Channel getChannel(Long channelId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
