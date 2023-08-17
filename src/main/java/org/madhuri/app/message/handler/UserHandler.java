@@ -8,8 +8,10 @@ import org.madhuri.app.message.model.User;
 import org.madhuri.app.message.service.ChannelService;
 import org.madhuri.app.message.service.UserService;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -32,21 +34,36 @@ public class UserHandler {
 	}
 
 	@POST
+	@Path("/create")
+	public User createUser(User newUser) {
+		return userService.createUser(newUser);
+	}
+
+	@DELETE
+	@Path("/delete/{id}")
+	public void deleteChannel(@PathParam("id") long id) {
+		userService.deleteUser(id);
+	}
+
+	@POST
 	@Path("/add-to-channel")
 	public Response addUserToChannel(ChannelUser channelUser) {
-		User user = userService.getUser(channelUser.getUserId());
-		Channel channel = channelService.getChannel(channelUser.getChannelId());
+		try {
+			Long userId = channelUser.getUserId();
+			Long channelId = channelUser.getChannelId();
 
-		if (user == null || channel == null) {
-			return Response.status(Response.Status.BAD_REQUEST).entity("{\"message\": \"User or channel not found\"}")
-					.type(MediaType.APPLICATION_JSON).build();
+			// Assuming UserService manages transactions and database operations
+			User addedUser = userService.addUserToChannel(userId, channelId);
+
+			if (addedUser != null) {
+				return Response.status(Response.Status.OK).entity(channelUser).build();
+			} else {
+				return Response.status(Response.Status.NOT_FOUND).entity("User or channel not found").build();
+			}
+		} catch (Exception e) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+					.entity("Failed to add user to channel: " + e.getMessage()).build();
 		}
-
-		channel.addUser(user);
-		channelService.updateChannel(channel);
-
-		return Response.ok().entity("{\"message\": \"User added to channel successfully\"}")
-				.type(MediaType.APPLICATION_JSON).build();
 	}
 
 }

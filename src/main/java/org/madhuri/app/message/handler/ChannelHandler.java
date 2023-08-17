@@ -5,6 +5,7 @@ import org.madhuri.app.message.service.UserService;
 
 import java.util.List;
 import org.madhuri.app.message.model.Channel;
+import org.madhuri.app.message.model.ChannelUser;
 import org.madhuri.app.message.model.User;
 
 import jakarta.ws.rs.Consumes;
@@ -24,6 +25,7 @@ import jakarta.ws.rs.core.Response;
 public class ChannelHandler {
 
 	private ChannelService channelService = new ChannelService();
+	private UserService userService = new UserService();
 
 	@GET
 	@Path("/all")
@@ -57,5 +59,4 @@ public class ChannelHandler {
 		return Response.ok(updated).build();
 	}
 
-	
 }

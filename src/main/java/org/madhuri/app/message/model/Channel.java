@@ -24,8 +24,8 @@ public class Channel {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "channel_name")
+	private String channelName;
 
 	@Column(name = "admin_id")
 	private Long adminId;
@@ -44,33 +44,43 @@ public class Channel {
 
 	@Column(name = "updated_by")
 	private Long updatedBy;
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "channel_user", joinColumns = @JoinColumn(name = "channel_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-	private List<User> users = new ArrayList<>();
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "channel_user",
+            joinColumns = @JoinColumn(name = "channel_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+        )
+        private List<User> users = new ArrayList<>();
 
 	public Channel() {
 
 	}
 
-	public Channel(Long id, String name, Long adminId, String welcomeMessage, Date createdAt, Long createdBy,
-			Date updatedAt, Long updatedBy) {
+	public Channel(Long id, String channelName, Long adminId, String welcomeMessage, Date createdAt, Long createdBy,
+			Date updatedAt, Long updatedBy, List<User> users) {
+		super();
 		this.id = id;
-		this.name = name;
+		this.channelName = channelName;
 		this.adminId = adminId;
 		this.welcomeMessage = welcomeMessage;
 		this.createdAt = createdAt;
 		this.createdBy = createdBy;
 		this.updatedAt = updatedAt;
 		this.updatedBy = updatedBy;
+		this.users = users;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getChannelName() {
+		return channelName;
+	}
+
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
 	}
 
 	public Long getAdminId() {
@@ -101,10 +111,6 @@ public class Channel {
 		this.id = id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public void setAdminId(Long adminId) {
 		this.adminId = adminId;
 	}
@@ -133,14 +139,14 @@ public class Channel {
 		return users;
 	}
 
-	public void setUsers(List<User> users) 
-	{ 
-		this.users = users; 
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
-	 
 
 	public void addUser(User user) {
-		users.add(user);
-		user.getChannels().add(this);
-	}
+        users.add(user);
+        user.getChannels().add(this);
+    }
+
+
 }
