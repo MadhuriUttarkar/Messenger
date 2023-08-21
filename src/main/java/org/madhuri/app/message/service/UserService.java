@@ -12,6 +12,8 @@ public class UserService {
 
 	private UserDAO userDAO = new UserDAO();
 	private ChannelDAO channelDAO = new ChannelDAO();
+	
+
 
 	public List<User> getUsers() {
 		return userDAO.getUsers();
@@ -26,8 +28,8 @@ public class UserService {
 		userDAO.deleteUser(id);
 
 	}
-
-	public User addUserToChannel(Long userId, Long channelId) {
+	
+	/*public User addUserToChannel(Long userId, Long channelId) {
 		try {
             User user = userDAO.getUserById(userId);
             Channel channel = channelDAO.getChannelById(channelId);
@@ -41,6 +43,6 @@ public class UserService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to add user to channel: " + e.getMessage(), e);
         }
-    }
+    }*/
 
 }

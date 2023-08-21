@@ -2,14 +2,11 @@ package org.madhuri.app.message.service;
 
 import java.util.List;
 import org.madhuri.app.message.dao.ChannelDAO;
-import org.madhuri.app.message.dao.UserDAO;
 import org.madhuri.app.message.model.Channel;
-import org.madhuri.app.message.model.User;
 
 public class ChannelService {
 
 	private ChannelDAO channelDAO = new ChannelDAO();
-	
 
 	public List<Channel> getChannels() {
 		List<Channel> channelMessages = channelDAO.getchannels();
@@ -56,7 +53,4 @@ public class ChannelService {
 		return channel;
 
 	}
-
-	
-
 }

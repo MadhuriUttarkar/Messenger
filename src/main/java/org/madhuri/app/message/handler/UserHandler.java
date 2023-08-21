@@ -1,17 +1,13 @@
 package org.madhuri.app.message.handler;
 
 import java.util.List;
-
-import org.madhuri.app.message.model.Channel;
 import org.madhuri.app.message.model.ChannelUser;
 import org.madhuri.app.message.model.User;
-import org.madhuri.app.message.service.ChannelService;
 import org.madhuri.app.message.service.UserService;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -25,7 +21,7 @@ import jakarta.ws.rs.core.Response;
 public class UserHandler {
 
 	private UserService userService = new UserService();
-	private ChannelService channelService = new ChannelService();
+	
 
 	@GET
 	@Path("/all")
@@ -45,7 +41,7 @@ public class UserHandler {
 		userService.deleteUser(id);
 	}
 
-	@POST
+	/*@POST
 	@Path("/add-to-channel")
 	public Response addUserToChannel(ChannelUser channelUser) {
 		try {
@@ -64,6 +60,6 @@ public class UserHandler {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
 					.entity("Failed to add user to channel: " + e.getMessage()).build();
 		}
-	}
+	}*/
 
 }

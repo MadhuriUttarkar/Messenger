@@ -91,12 +91,12 @@ public class ChannelDAO {
 	
 	
 
-	public Channel getChannelById(Long channelId) {
+/*	public Channel getChannelById(Long channelId) {
         Session session = HibernateUtil.getSession();
         Channel channel = session.get(Channel.class, channelId);
         // Eagerly fetch the users collection
         Hibernate.initialize(channel.getUsers());
         session.close();
         return channel;
-    }
+    }*/
 }
