@@ -1,4 +1,3 @@
-
 package org.madhuri.app.message.dao;
 
 import java.util.List;
@@ -65,4 +64,21 @@ public class UserDAO {
 		return user;
 	}
 
+	public void updateUser(User existingUser) {
+		Session session = HibernateUtil.getSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            session.update(existingUser);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
 }

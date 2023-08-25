@@ -2,8 +2,6 @@ package org.madhuri.app.message.dao;
 
 import java.util.Date;
 import java.util.List;
-
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -14,7 +12,7 @@ public class ChannelDAO {
 
 	public List<Channel> getchannels() {
 		Session session = HibernateUtil.getSession();
-		Query query = session.createQuery("from Channel");
+		Query<Channel> query = session.createQuery("from Channel",Channel.class);
 		List<Channel> channelmessages = query.list();
 		session.close();
 		return channelmessages;
@@ -88,15 +86,4 @@ public class ChannelDAO {
 		session.close();
 		return channel;
 	}
-	
-	
-
-/*	public Channel getChannelById(Long channelId) {
-        Session session = HibernateUtil.getSession();
-        Channel channel = session.get(Channel.class, channelId);
-        // Eagerly fetch the users collection
-        Hibernate.initialize(channel.getUsers());
-        session.close();
-        return channel;
-    }*/
 }

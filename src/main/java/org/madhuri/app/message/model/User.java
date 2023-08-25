@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbTransient;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -18,14 +21,16 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@JsonbProperty("id")
 	private Long id;
 
 	@Column(name = "name")
+	@JsonbProperty("name")
 	private String name;
 
-	
-	/*@ManyToMany(mappedBy = "users",fetch = FetchType.EAGER)
-	private List<Channel> channels = new ArrayList<>();*/
+	@ManyToMany(mappedBy = "users",fetch=FetchType.EAGER)
+	@JsonbTransient
+	private List<Channel> channels = new ArrayList<>();
 
 	public User() {
 	}
@@ -34,7 +39,7 @@ public class User {
 		super();
 		this.id = id;
 		this.name = name;
-		//this.channels = channels;
+		this.channels = channels;
 	}
 
 	public Long getId() {
@@ -53,12 +58,12 @@ public class User {
 		this.name = name;
 	}
 
-	/*public void setChannels(List<Channel> channels) {
+	public void setChannels(List<Channel> channels) {
 		this.channels = channels;
 	}
 
 	public List<Channel> getChannels() {
 		return channels;
-	}*/
+	}
 
 }

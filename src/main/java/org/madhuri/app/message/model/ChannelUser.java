@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import jakarta.json.bind.annotation.JsonbProperty;
+
 @Entity
 @Table(name = "channel_user")
 public class ChannelUser {
@@ -14,12 +16,15 @@ public class ChannelUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@JsonbProperty("id")
 	private Long id;
-	
+
 	@Column(name = "user_id")
+	@JsonbProperty("userId")
 	private Long userId;
-	
+
 	@Column(name = "channel_id")
+	@JsonbProperty("channelId")
 	private Long channelId;
 
 	public ChannelUser() {
@@ -57,4 +62,3 @@ public class ChannelUser {
 	}
 
 }
-
