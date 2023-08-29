@@ -1,9 +1,9 @@
-
 package org.madhuri.app.message.service;
 
+import java.util.Date;
 import java.util.List;
-
 import org.madhuri.app.message.dao.ChannelDAO;
+import org.madhuri.app.message.dao.ChannelUserDAO;
 import org.madhuri.app.message.dao.UserDAO;
 import org.madhuri.app.message.model.Channel;
 import org.madhuri.app.message.model.User;
@@ -12,14 +12,14 @@ public class UserService {
 
 	private UserDAO userDAO = new UserDAO();
 	private ChannelDAO channelDAO = new ChannelDAO();
-	
-
+	private ChannelUserDAO channelUserDAO = new ChannelUserDAO();
 
 	public List<User> getUsers() {
 		return userDAO.getUsers();
 	}
 
 	public User createUser(User newUser) {
+		newUser.setUpdatedAt(new Date());
 		return userDAO.addUser(newUser);
 
 	}
@@ -28,6 +28,7 @@ public class UserService {
 		userDAO.deleteUser(id);
 
 	}
+
 	public User getUserById(long id) {
 		User user = userDAO.getUserById(id);
 
@@ -43,35 +44,35 @@ public class UserService {
 		User user = null;
 		return user;
 	}
-	
+
 	public User addUserToChannel(Long userId, Long channelId) {
 		try {
-            User user = userDAO.getUserById(userId);
-            Channel channel = channelDAO.getChannelById(channelId);
+			User user = userDAO.getUserById(userId);
+			Channel channel = channelDAO.getChannelById(channelId);
 
-            if (user != null && channel != null) {
-                channel.addUser(user);
-                channelDAO.updateChannel(channel);
+			if (user != null && channel != null) {
+			    channelUserDAO.addUserToChannel(userId, channelId);
                 return user;
-            }
-            return null;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to add user to channel: " + e.getMessage(), e);
-        }
-    }
+			}
+			return null;
+		} catch (Exception e) {
+			throw new RuntimeException("Failed to add user to channel: " + e.getMessage(), e);
+		}
+	}
 
 	public User updateUser(long id, User updatedUser) {
 		try {
-            User existingUser = userDAO.getUserById(id);
+			User existingUser = userDAO.getUserById(id);
 
-            if (existingUser != null) {
-                existingUser.setName(updatedUser.getName());
-                userDAO.updateUser(existingUser);
-                return existingUser;
-            }
-            return null;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to update user: " + e.getMessage(), e);
-        }
-    }
+			if (existingUser != null) {
+				existingUser.setName(updatedUser.getName());
+				existingUser.setUpdatedAt(new Date());
+				userDAO.updateUser(existingUser);
+				return existingUser;
+			}
+			return null;
+		} catch (Exception e) {
+			throw new RuntimeException("Failed to update user: " + e.getMessage(), e);
+		}
+	}
 }

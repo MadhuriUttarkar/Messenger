@@ -1,16 +1,16 @@
 package org.madhuri.app.message.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
+import javax.persistence.Transient;
+import jakarta.json.bind.annotation.JsonbDateFormat;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbTransient;
 
@@ -28,18 +28,24 @@ public class User {
 	@JsonbProperty("name")
 	private String name;
 
-	@ManyToMany(mappedBy = "users",fetch=FetchType.EAGER)
 	@JsonbTransient
+	@Transient
 	private List<Channel> channels = new ArrayList<>();
+
+	@Column(name = "updated_at")
+	@JsonbProperty("updatedAt")
+	@JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+	private Date updatedAt;
 
 	public User() {
 	}
 
-	public User(Long id, String name, List<Channel> channels) {
+	public User(Long id, String name, List<Channel> channels, Date updatedAt) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.channels = channels;
+		this.updatedAt = updatedAt;
 	}
 
 	public Long getId() {
@@ -64,6 +70,14 @@ public class User {
 
 	public List<Channel> getChannels() {
 		return channels;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 }

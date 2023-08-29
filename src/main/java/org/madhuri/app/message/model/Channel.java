@@ -3,19 +3,16 @@ package org.madhuri.app.message.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import jakarta.json.bind.annotation.JsonbDateFormat;
 import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbTransient;
 
 @Entity
 @Table(name = "channel")
@@ -27,7 +24,6 @@ public class Channel {
 	@Column(name = "id")
 	private Long id;
 
-	
 	@Column(name = "channel_name")
 	@JsonbProperty("channelName")
 	private String channelName;
@@ -42,6 +38,7 @@ public class Channel {
 
 	@Column(name = "created_at")
 	@JsonbProperty("createdAt")
+	@JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 	private Date createdAt;
 
 	@Column(name = "created_by")
@@ -49,14 +46,16 @@ public class Channel {
 	private Long createdBy;
 
 	@Column(name = "updated_at")
+	@JsonbProperty("updatedAt")
+	@JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 	private Date updatedAt;
 
 	@Column(name = "updated_by")
 	@JsonbProperty("updatedBy")
 	private Long updatedBy;
 
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinTable(name = "channel_user", joinColumns = @JoinColumn(name = "channel_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	@JsonbTransient
+	@Transient
 	private List<User> users = new ArrayList<>();
 
 	public Channel() {
@@ -150,8 +149,4 @@ public class Channel {
 		this.users = users;
 	}
 
-	public void addUser(User user) {
-		users.add(user);
-		user.getChannels().add(this);
-	}
 }

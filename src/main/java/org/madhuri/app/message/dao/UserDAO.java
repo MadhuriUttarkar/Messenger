@@ -1,5 +1,6 @@
 package org.madhuri.app.message.dao;
 
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -30,7 +31,7 @@ public class UserDAO {
 			}
 			e.printStackTrace();
 		} finally {
-			session.close();
+	            session.close();
 		}
 		return newUser;
 	}
@@ -70,6 +71,7 @@ public class UserDAO {
 
         try {
             transaction = session.beginTransaction();
+            existingUser.setUpdatedAt(new Date());
             session.update(existingUser);
             transaction.commit();
         } catch (Exception e) {

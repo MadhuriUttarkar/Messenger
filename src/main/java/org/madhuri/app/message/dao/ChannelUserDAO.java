@@ -1,32 +1,32 @@
-
 package org.madhuri.app.message.dao;
 
-import org.madhuri.app.message.model.Channel;
-import org.madhuri.app.message.model.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.madhuri.app.message.model.ChannelUser;
+import org.madhuri.app.message.util.HibernateUtil;
 
 public class ChannelUserDAO {
-	
-private ChannelDAO channelDAO = new ChannelDAO();
-    
-    public User addUserToChannel(User user, Channel channel) {
-    	try {
-            if (user == null || channel == null) {
-                throw new IllegalArgumentException("User and channel must not be null");
-            }
 
-            channel.addUser(user);
-            channelDAO.updateChannel(channel);
-            
-            return user;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to add user to channel: " + e.getMessage(), e);
-        }
-    }
+	public void addUserToChannel(Long userId, Long channelId) {
+		try {
+			if (userId == null || channelId == null) {
+				throw new IllegalArgumentException("User ID and channel ID must not be null");
+			}
 
-	public Channel getChannelById(Long channelId) {
-		
-		Channel channel = null;
-		return channel;
-		
+			Session session = HibernateUtil.getSession();
+			Transaction transaction = session.beginTransaction();
+
+			ChannelUser channelUser = new ChannelUser();
+			channelUser.setUserId(userId);
+			channelUser.setChannelId(channelId);
+
+			session.save(channelUser);
+
+			transaction.commit();
+			session.close();
+		} catch (Exception e) {
+			throw new RuntimeException("Failed to add user to channel: " + e.getMessage(), e);
+		}
 	}
+	
 }

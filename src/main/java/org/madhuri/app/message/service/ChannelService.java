@@ -3,8 +3,6 @@ package org.madhuri.app.message.service;
 import java.util.List;
 import org.madhuri.app.message.dao.ChannelDAO;
 import org.madhuri.app.message.model.Channel;
-import org.madhuri.app.message.model.User;
-
 import jakarta.ws.rs.NotFoundException;
 
 public class ChannelService {
@@ -44,12 +42,7 @@ public class ChannelService {
 		existingChannel.setWelcomeMessage(updatedChannel.getWelcomeMessage());
 		existingChannel.setUpdatedAt(updatedChannel.getUpdatedAt());
 		existingChannel.setUpdatedBy(updatedChannel.getUpdatedBy());
-		
-		// Update user list in the existing channel
-	    List<User> updatedUserList = updatedChannel.getUsers();
-	    existingChannel.setUsers(updatedUserList);
 
-	    
 		return channelDAO.updateChannel(existingChannel);
 	}
 
