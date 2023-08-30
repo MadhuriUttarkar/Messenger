@@ -24,7 +24,6 @@ import jakarta.ws.rs.core.Response;
 public class UserHandler {
 
 	private UserService userService = new UserService();
-	
 
 	@GET
 	@Path("/all")
@@ -35,7 +34,7 @@ public class UserHandler {
 	@POST
 	@Path("/create")
 	public User createUser(User newUser) {
-		
+
 		return userService.createUser(newUser);
 	}
 
@@ -66,32 +65,28 @@ public class UserHandler {
 	@POST
 	@Path("/add-to-channel")
 	public Response addUserToChannel(ChannelUser channelUser) {
-	    try {
-	        Long userId = channelUser.getUserId();
-	        Long channelId = channelUser.getChannelId();
+		try {
+			Long userId = channelUser.getUserId();
+			Long channelId = channelUser.getChannelId();
 
-	     // Assuming UserService manages transactions and database operations
-            User addedUser = userService.addUserToChannel(userId, channelId);
+			// Assuming UserService manages transactions and database operations
+			User addedUser = userService.addUserToChannel(userId, channelId);
 
-            if (addedUser != null) {
-                return Response.status(Response.Status.OK)
-                        .entity(channelUser)  
-                        .build();
-            } else {
-                return Response.status(Response.Status.NOT_FOUND)
-                        .entity("User or channel not found")
-                        .build();
-            }
-        } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("Failed to add user to channel: " + e.getMessage())
-                    .build();
-        }
-    }
+			if (addedUser != null) {
+				return Response.status(Response.Status.OK).entity(channelUser).build();
+			} else {
+				return Response.status(Response.Status.NOT_FOUND).entity("User or channel not found").build();
+			}
+		} catch (Exception e) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+					.entity("Failed to add user to channel: " + e.getMessage()).build();
+		}
+	}
 
 	@GET
 	@Path("/{id}")
 	public User getUser(@PathParam("id") long id) {
 		return userService.getUserById(id);
 	}
+
 }

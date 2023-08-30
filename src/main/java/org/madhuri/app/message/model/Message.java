@@ -1,26 +1,41 @@
 package org.madhuri.app.message.model;
 
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbDateFormat; 
 
-
+@Entity
+@Table(name = "Message")
 public class Message{
 
-    @JsonbProperty("id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	@JsonbProperty("id")
     private long id;
 
+    @Column(name="messageContent")
     @JsonbProperty("messageContent")
     private String messageContent;
 
+    @Column(name="created")
     @JsonbProperty("created")
     @JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date created;
 
+    @Column(name="username")
     @JsonbProperty("username")
     private String username;
     
 
+    @Column(name = "recipient")
     @JsonbProperty("recipient")
     private String recipient;
 
@@ -87,5 +102,3 @@ public class Message{
 		this.recipient = recipient;
 	}
 }
-
-
