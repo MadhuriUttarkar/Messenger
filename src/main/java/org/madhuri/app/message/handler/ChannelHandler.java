@@ -20,6 +20,7 @@ import jakarta.ws.rs.core.Response;
 public class ChannelHandler {
 
 	private ChannelService channelService = new ChannelService();
+	
 
 	@GET
 	@Path("/all")
@@ -38,18 +39,25 @@ public class ChannelHandler {
 	public void deleteChannel(@PathParam("id") long id) {
 		channelService.deleteChannel(id);
 	}
+
+	@PUT
+	@Path("/update/{id}")
+	public Response updateChannel(@PathParam("id") long id, Channel updatedChannel) {
+		Channel existingChannel = channelService.getChannelById(id);
+		if (existingChannel == null) {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
+
+		updatedChannel.setId(id);
+
+		Channel updated = channelService.updateChannel(updatedChannel);
+		return Response.ok(updated).build();
+	}
 	
-    @PUT 
-    @Path("/update/{id}")
-    public Response updateChannel(@PathParam("id") long id, Channel updatedChannel) {
-        Channel existingChannel = channelService.getChannelById(id);
-        if (existingChannel == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+	@GET
+	@Path("/{id}")
+	public Channel getChannel(@PathParam("id") long id) {
+	    return channelService.getChannelById(id);
+	}
 
-        updatedChannel.setId(id); 
-
-        Channel updated = channelService.updateChannel(updatedChannel);
-        return Response.ok(updated).build();
-    }
 }

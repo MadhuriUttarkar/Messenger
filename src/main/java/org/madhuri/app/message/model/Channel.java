@@ -1,12 +1,18 @@
 package org.madhuri.app.message.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import jakarta.json.bind.annotation.JsonbDateFormat;
+import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbTransient;
 
 @Entity
 @Table(name = "channel")
@@ -14,53 +20,73 @@ public class Channel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonbProperty("id")
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "channel_name")
+	@JsonbProperty("channelName")
+	private String channelName;
 
 	@Column(name = "admin_id")
+	@JsonbProperty("adminId")
 	private Long adminId;
 
 	@Column(name = "welcome_message")
+	@JsonbProperty("welcomeMessage")
 	private String welcomeMessage;
 
 	@Column(name = "created_at")
+	@JsonbProperty("createdAt")
+	@JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 	private Date createdAt;
 
 	@Column(name = "created_by")
+	@JsonbProperty("createdBy")
 	private Long createdBy;
 
 	@Column(name = "updated_at")
+	@JsonbProperty("updatedAt")
+	@JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 	private Date updatedAt;
 
 	@Column(name = "updated_by")
+	@JsonbProperty("updatedBy")
 	private Long updatedBy;
+
+	@JsonbTransient
+	@Transient
+	private List<User> users = new ArrayList<>();
 
 	public Channel() {
 
 	}
 
-	public Channel(Long id, String name, Long adminId, String welcomeMessage, Date createdAt, Long createdBy,
-			Date updatedAt, Long updatedBy) {
+	public Channel(Long id, String channelName, Long adminId, String welcomeMessage, Date createdAt, Long createdBy,
+			Date updatedAt, Long updatedBy, List<User> users) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.channelName = channelName;
 		this.adminId = adminId;
 		this.welcomeMessage = welcomeMessage;
 		this.createdAt = createdAt;
 		this.createdBy = createdBy;
 		this.updatedAt = updatedAt;
 		this.updatedBy = updatedBy;
+		this.users = users;
+
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getChannelName() {
+		return channelName;
+	}
+
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
 	}
 
 	public Long getAdminId() {
@@ -91,10 +117,6 @@ public class Channel {
 		this.id = id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public void setAdminId(Long adminId) {
 		this.adminId = adminId;
 	}
@@ -117,6 +139,14 @@ public class Channel {
 
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 }

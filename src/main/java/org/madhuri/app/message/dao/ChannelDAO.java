@@ -12,7 +12,7 @@ public class ChannelDAO {
 
 	public List<Channel> getchannels() {
 		Session session = HibernateUtil.getSession();
-		Query query = session.createQuery("from Channel");
+		Query<Channel> query = session.createQuery("from Channel",Channel.class);
 		List<Channel> channelmessages = query.list();
 		session.close();
 		return channelmessages;
@@ -59,31 +59,33 @@ public class ChannelDAO {
 		}
 	}
 
-	public Channel getChannelById(long id) {
+	public Channel updateChannel(Channel existingChannel) {
 		Session session = HibernateUtil.getSession();
-        Channel channel = session.get(Channel.class, id);
-        session.close();
-        return channel;
+		Transaction transaction = null;
+
+		try {
+			transaction = session.beginTransaction();
+			existingChannel.setUpdatedAt(new Date());
+			session.update(existingChannel); // Update the channel entity
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return existingChannel;
 	}
 
-	public Channel updateChannel(Channel existingChannel) {
-		 Session session = HibernateUtil.getSession();
-	        Transaction transaction = null;
-
-	        try {
-	            transaction = session.beginTransaction();
-	            existingChannel.setUpdatedAt(new Date());
-	            session.update(existingChannel); // Update the channel entity
-	            transaction.commit();
-	        } catch (Exception e) {
-	            if (transaction != null) {
-	                transaction.rollback();
-	            }
-	            e.printStackTrace();
-	        } finally {
-	            session.close();
-	        }
-
-	        return existingChannel;
-	    }
+	public Channel getChannelById(long id) {
+		Session session = HibernateUtil.getSession();
+		Channel channel = session.get(Channel.class, id);
+		session.close();
+		return channel;
+	}
+	
+	
 }
