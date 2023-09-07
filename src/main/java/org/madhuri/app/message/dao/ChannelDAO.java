@@ -12,7 +12,7 @@ public class ChannelDAO {
 
 	public List<Channel> getchannels() {
 		Session session = HibernateUtil.getSession();
-		Query<Channel> query = session.createQuery("from Channel",Channel.class);
+		Query<Channel> query = session.createQuery("from Channel", Channel.class);
 		List<Channel> channelmessages = query.list();
 		session.close();
 		return channelmessages;
@@ -86,6 +86,4 @@ public class ChannelDAO {
 		session.close();
 		return channel;
 	}
-	
-	
 }

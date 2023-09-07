@@ -15,6 +15,5 @@
 		<mapping class="org.madhuri.app.message.model.User"/>
 		<mapping class="org.madhuri.app.message.model.ChannelUser"/>
 		<mapping class="org.madhuri.app.message.model.Message"/>
-		
 	</session-factory>
 </hibernate-configuration>

@@ -20,7 +20,6 @@ import jakarta.ws.rs.core.Response;
 public class ChannelHandler {
 
 	private ChannelService channelService = new ChannelService();
-	
 
 	@GET
 	@Path("/all")
@@ -53,11 +52,10 @@ public class ChannelHandler {
 		Channel updated = channelService.updateChannel(updatedChannel);
 		return Response.ok(updated).build();
 	}
-	
+
 	@GET
 	@Path("/{id}")
 	public Channel getChannel(@PathParam("id") long id) {
-	    return channelService.getChannelById(id);
+		return channelService.getChannelById(id);
 	}
-
 }

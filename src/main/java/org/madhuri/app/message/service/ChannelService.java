@@ -5,6 +5,7 @@ import org.madhuri.app.message.dao.ChannelDAO;
 import org.madhuri.app.message.model.Channel;
 import jakarta.ws.rs.NotFoundException;
 
+
 public class ChannelService {
 
 	private ChannelDAO channelDAO = new ChannelDAO();
@@ -46,14 +47,14 @@ public class ChannelService {
 		return channelDAO.updateChannel(existingChannel);
 	}
 
-	public Channel getChannelById(long id) {
-		Channel channel = channelDAO.getChannelById(id);
+	public Channel getChannelById(long channelId) {
+		Channel channel = channelDAO.getChannelById(channelId);
 
-		if (channel == null) {
-			throw new IllegalArgumentException("Channel with ID " + id + " not found");
-		}
+	    if (channel == null) {
+	        throw new NotFoundException("Channel with ID " + channelId + " not found");
+	    }
 
-		return channel;
-
+	    return channel;
 	}
+
 }

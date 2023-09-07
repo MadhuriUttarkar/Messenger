@@ -18,14 +18,16 @@ public class MessageService {
 		return messageDAO.addMessage(msg);
 	}
 
-	public Message getMessageById(long messageId) {
-		return messageDAO.getMessageById(messageId);
+	public Message getMessageById(long id) {
+		return messageDAO.getMessageById(id);
 	}
 
-	public List<Message> getMessagesForUsername(String username) {
-		List<Message> userMessages = messageDAO.getMessagesByUsername(username);
-		return userMessages;
+	public void deleteMessage(long id) {
+		messageDAO.deleteMessage(id);
 
 	}
 
+	public Message addMessageToChannel(long channelId, Message msg) {
+        return messageDAO.addMessageToChannel(channelId, msg);
+    }
 }
