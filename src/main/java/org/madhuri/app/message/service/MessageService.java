@@ -4,33 +4,30 @@ import java.util.List;
 import org.madhuri.app.message.dao.MessageDAO;
 import org.madhuri.app.message.model.Message;
 
-
 public class MessageService {
 
-    private MessageDAO messageDAO=new MessageDAO();
-    
-    
-    public List<Message> getAllMessages() {
-    	List<Message> allMessages = messageDAO.getAllMessages();
-        return allMessages;
-    }
-    
+	private MessageDAO messageDAO = new MessageDAO();
 
-    public Message addMessage(Message msg) {
-    	
-        return messageDAO.addMessage(msg);
-    }
-
-
-	public Message getMessageById(long messageId) {
-		return messageDAO.getMessageById(messageId);
+	public List<Message> getAllMessages() {
+		List<Message> allMessages = messageDAO.getAllMessages();
+		return allMessages;
 	}
 
+	public Message addMessage(Message msg) {
 
-	public List<Message> getMessagesForUsername(String username) {
-		List<Message> userMessages = messageDAO.getMessagesByUsername(username);
-        return userMessages;
+		return messageDAO.addMessage(msg);
+	}
+
+	public Message getMessageById(long id) {
+		return messageDAO.getMessageById(id);
+	}
+
+	public void deleteMessage(long id) {
+		messageDAO.deleteMessage(id);
 
 	}
 
+	public Message addMessageToChannel(long channelId, Message msg) {
+        return messageDAO.addMessageToChannel(channelId, msg);
+    }
 }

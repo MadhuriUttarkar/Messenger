@@ -51,8 +51,8 @@ public class UserService {
 			Channel channel = channelDAO.getChannelById(channelId);
 
 			if (user != null && channel != null) {
-			    channelUserDAO.addUserToChannel(userId, channelId);
-                return user;
+				channelUserDAO.addUserToChannel(userId, channelId);
+				return user;
 			}
 			return null;
 		} catch (Exception e) {
@@ -75,4 +75,5 @@ public class UserService {
 			throw new RuntimeException("Failed to update user: " + e.getMessage(), e);
 		}
 	}
+
 }

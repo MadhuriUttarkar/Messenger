@@ -57,13 +57,18 @@ public class Channel {
 	@JsonbTransient
 	@Transient
 	private List<User> users = new ArrayList<>();
+	
+	@JsonbTransient
+	@Transient
+	private List<Message> messages = new ArrayList<>();
+	
 
 	public Channel() {
 
 	}
 
 	public Channel(Long id, String channelName, Long adminId, String welcomeMessage, Date createdAt, Long createdBy,
-			Date updatedAt, Long updatedBy, List<User> users) {
+			Date updatedAt, Long updatedBy, List<User> users,List<Message>messages) {
 		super();
 		this.id = id;
 		this.channelName = channelName;
@@ -74,7 +79,7 @@ public class Channel {
 		this.updatedAt = updatedAt;
 		this.updatedBy = updatedBy;
 		this.users = users;
-
+		this.messages = messages;
 	}
 
 	public Long getId() {
@@ -149,4 +154,11 @@ public class Channel {
 		this.users = users;
 	}
 
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}	
 }

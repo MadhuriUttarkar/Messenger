@@ -4,6 +4,7 @@ import java.util.List;
 import org.madhuri.app.message.model.Message;
 import org.madhuri.app.message.service.MessageService;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -33,18 +34,26 @@ public class MessageHandler {
         return messageService.addMessage(msg);
     }
     
-    @GET
-    @Path("/{messageId}")
-    public Message getMessage(@PathParam("messageId")long messageId)
+    @DELETE
+    @Path("/delete/{id}")
+    public void deleteMessage(@PathParam("id") long id)
     {
-    	return messageService.getMessageById(messageId);
+    	messageService.deleteMessage(id);
+    }
+    @GET
+    @Path("/{id}")
+    public Message getMessage(@PathParam("id")long id)
+    {
+    	return messageService.getMessageById(id);
     }
     
-    @GET
-    @Path("/user/{username}")
-    public List<Message> getMessagesForUsername(@PathParam("username")String username)
-    {
-    	return messageService.getMessagesForUsername(username);
+    @POST
+    @Path("/{channelId}/send")
+    public Message addMessageToChannel(@PathParam("channelId") long channelId, Message msg) {
+        // Ensure the Message object has the channelId set
+        msg.setChannelId(channelId);
+        
+        return messageService.addMessageToChannel(channelId, msg);
     }
 }
 
