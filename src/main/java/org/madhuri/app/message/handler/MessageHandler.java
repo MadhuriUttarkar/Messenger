@@ -48,7 +48,7 @@ public class MessageHandler {
     }
     
     @POST
-    @Path("/{channelId}/add")
+    @Path("/{channelId}/send")
     public Message addMessageToChannel(@PathParam("channelId") long channelId, Message msg) {
         // Ensure the Message object has the channelId set
         msg.setChannelId(channelId);

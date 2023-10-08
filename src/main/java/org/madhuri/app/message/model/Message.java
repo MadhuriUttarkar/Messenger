@@ -22,7 +22,7 @@ public class Message {
 	private long id;
 
 	@JsonbProperty("messageContent")
-	@Column(name = "messageContent")
+	@Column(name = "message_content")
 	private String messageContent;
 
 	@JsonbProperty("created")
@@ -43,7 +43,7 @@ public class Message {
 	private Channel channel;
 	
 	@JsonbProperty("channelId")
-	@Column(name = "channelId")
+	@Column(name = "channel_id")
 	private Long channelId;
 
 	public Message() {
